@@ -49,7 +49,7 @@ namespace CarBooking.API.Controllers
             return Ok("Yeni Banner Bilgisi Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveBanner(int id)
         {
             await _removeBannerCommandHandler.Handle(new RemoveBannerCommand(id));

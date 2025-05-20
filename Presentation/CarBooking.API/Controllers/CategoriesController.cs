@@ -46,7 +46,7 @@ namespace CarBooking.API.Controllers
             return Ok("Yeni Kategori Bilgisi Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveCategory(int id)
         {
             await _removeCategoryCommandHandler.Handle(new RemoveCategoryCommand(id));

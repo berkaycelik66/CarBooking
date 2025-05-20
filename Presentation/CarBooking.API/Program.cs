@@ -6,6 +6,7 @@ using CarBooking.Application.Features.CQRS.Handlers.CategoryHandlers;
 using CarBooking.Application.Features.CQRS.Handlers.ContactHandlers;
 using CarBooking.Application.Interfaces;
 using CarBooking.Application.Interfaces.CarInterfaces;
+using CarBooking.Application.Services;
 using CarBooking.Persistence.Context;
 using CarBooking.Persistence.Repositories;
 using CarBooking.Persistence.Repositories.CarRepositories;
@@ -54,6 +55,8 @@ builder.Services.AddScoped<GetContactByIdQueryHandler>();
 builder.Services.AddScoped<CreateContactCommandHandler>();
 builder.Services.AddScoped<RemoveContactCommandHandler>();
 builder.Services.AddScoped<UpdateContactCommandHandler>();
+
+builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

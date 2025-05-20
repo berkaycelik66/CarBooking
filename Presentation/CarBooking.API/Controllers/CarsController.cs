@@ -48,7 +48,7 @@ namespace CarBooking.API.Controllers
             return Ok("Yeni Araba Bilgisi Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveCar(int id)
         {
             await _removeCarCommandHandler.Handle(new RemoveCarCommand(id));
