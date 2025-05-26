@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-
 namespace CarBooking.WebUI.Controllers
 {
-    public class ServiceController : Controller
+    public class DefaultController : Controller
     {
         public IActionResult Index()
         {
