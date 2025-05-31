@@ -7,10 +7,12 @@ using CarBooking.Application.Features.CQRS.Handlers.ContactHandlers;
 using CarBooking.Application.Interfaces;
 using CarBooking.Application.Interfaces.BlogInterfaces;
 using CarBooking.Application.Interfaces.CarInterfaces;
+using CarBooking.Application.Interfaces.CarPricingInterfaces;
 using CarBooking.Application.Services;
 using CarBooking.Persistence.Context;
 using CarBooking.Persistence.Repositories;
 using CarBooking.Persistence.Repositories.BlogRepositories;
+using CarBooking.Persistence.Repositories.CarPricingRepositories;
 using CarBooking.Persistence.Repositories.CarRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +23,7 @@ builder.Services.AddScoped<CarBookingContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+builder.Services.AddScoped<ICarPricingRepository, CarPricingRepository>();
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
