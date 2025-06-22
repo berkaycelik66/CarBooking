@@ -19,6 +19,11 @@ namespace CarBooking.Persistence.Repositories.BlogRepositories
             _context = context;
         }
 
+        public Task<List<Blog>> GetAllBlogsWithAuthors()
+        {
+            return _context.Blogs.Include(x => x.Author).Include(x => x.Category).ToListAsync();
+        }
+
         public Task<List<Blog>> GetLast3BlogsWithAuthors()
         {
             return _context.Blogs.Include(x => x.Author).OrderByDescending(x => x.BlogID).Take(3).ToListAsync();
