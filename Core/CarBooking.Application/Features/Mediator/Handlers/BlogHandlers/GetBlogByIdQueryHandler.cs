@@ -28,6 +28,7 @@ namespace CarBooking.Application.Features.Mediator.Handlers.BlogHandlers
             {
                 BlogID = value.BlogID,
                 Title = value.Title,
+                Description = value.Description,
                 AuthorID = value.AuthorID,
                 CoverImageUrl = value.CoverImageUrl,
                 CreatedDate = value.CreatedDate,

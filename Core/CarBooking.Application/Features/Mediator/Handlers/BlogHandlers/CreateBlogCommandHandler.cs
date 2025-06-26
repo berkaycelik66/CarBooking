@@ -24,6 +24,7 @@ namespace CarBooking.Application.Features.Mediator.Handlers.BlogHandlers
             await _repository.CreateAsync(new Blog
             {
                 Title = request.Title,
+                Description = request.Description,
                 AuthorID = request.AuthorID,
                 CoverImageUrl = request.CoverImageUrl,
                 CreatedDate = request.CreatedDate,
