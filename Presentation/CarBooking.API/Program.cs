@@ -4,6 +4,7 @@ using CarBooking.Application.Features.CQRS.Handlers.BrandHandlers;
 using CarBooking.Application.Features.CQRS.Handlers.CarHandlers;
 using CarBooking.Application.Features.CQRS.Handlers.CategoryHandlers;
 using CarBooking.Application.Features.CQRS.Handlers.ContactHandlers;
+using CarBooking.Application.Features.RepositoryPattern;
 using CarBooking.Application.Interfaces;
 using CarBooking.Application.Interfaces.BlogInterfaces;
 using CarBooking.Application.Interfaces.CarInterfaces;
@@ -15,6 +16,7 @@ using CarBooking.Persistence.Repositories;
 using CarBooking.Persistence.Repositories.BlogRepositories;
 using CarBooking.Persistence.Repositories.CarPricingRepositories;
 using CarBooking.Persistence.Repositories.CarRepositories;
+using CarBooking.Persistence.Repositories.CommentRepositories;
 using CarBooking.Persistence.Repositories.TagCloudRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,7 @@ builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<ICarPricingRepository, CarPricingRepository>();
 builder.Services.AddScoped<ITagCloudRepository, TagCloudRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(CommentRepository<>));
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
