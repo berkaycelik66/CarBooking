@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Html.PartialAsync("AdminHeaderPartial.cshtml")
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        @await Html.PartialAsync("AdminNavbarPartial.cshtml")
+
+        <!-- ========== Left Sidebar Start ========== -->
+        @await Html.PartialAsync("AdminSidebarPartial.cshtml")
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            @RenderBody()
+            
+            <!-- End Page-content -->
+            @await Html.PartialAsync("AdminFooterPartial.cshtml")
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- Overlay-->
+    @await Html.PartialAsync("AdminScriptPartial.cshtml")
+</body>
+</html>
