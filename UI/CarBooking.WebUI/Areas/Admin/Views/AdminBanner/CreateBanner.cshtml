@@ -1,0 +1,52 @@
+﻿@model CreateBannerDto
+
+@{
+    ViewData["Title"] = "CreateBanner";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Yeni Banner Girişi</h4>
+                        <p class="card-subtitle mb-4">
+                            Bilgileri girerek yeni bir banner ekleyebilirsiniz.
+                        </p>
+
+                        <!-- end card-body-->
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="Title">Başlık</label>
+                                <input type="text" class="form-control" id="Title" asp-for="Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Açıklama</label>
+                                <input type="text" class="form-control" id="Description" asp-for="Description">
+                            </div>
+                            <div class="form-group">
+                                <label for="VideoUrl">Video URL</label>
+                                <input type="text" class="form-control" id="VideoUrl" asp-for="VideoUrl">
+                            </div>
+                            <div class="form-group">
+                                <label for="VideoDescription">Videp Açıklama</label>
+                                <input type="text" class="form-control" id="VideoDescription" asp-for="VideoDescription">
+                            </div>
+                            <a href="/Admin/AdminBanner/Index/" class="btn btn-danger">Geri Dön</a>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Bannerı Ekle</button>
+                        </form>
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end page title -->
+
+        </div> <!-- container-fluid -->
+    </div>
+</div>
+
