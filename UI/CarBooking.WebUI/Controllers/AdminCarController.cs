@@ -92,7 +92,7 @@ namespace CarBooking.WebUI.Controllers
             return View();
         }
 
-
+        [NonAction]
         public async Task GetBrandList()
         {
             var client = _httpClientFactory.CreateClient();

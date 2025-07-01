@@ -30,6 +30,13 @@ namespace CarBooking.API.Controllers
             return Ok(value);
         }
 
+        [HttpGet("GetCommentListByBlogId/{id}")]
+        public IActionResult GetCommentListByBlogId(int id)
+        {
+            var value = _commentRepository.GetCommentsByBlogId(id);
+            return Ok(value);
+        }
+
         [HttpPost]
         public IActionResult CreateComment(Comment comment)
         {

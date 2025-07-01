@@ -1,0 +1,62 @@
+﻿@model List<ResultCommentByBlogIdDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Yorum Listesi - BlogID: @ViewBag.v</h4>
+                        <p class="card-subtitle mb-4">
+                            Bloglara ait yorumlarla ile ilgili işlemleri yapabilirsiniz.
+                        </p>
+                        @if (Model.Count > 0)
+                        {
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <h5 class="card-header d-flex justify-content-between">
+                                            <span>Yorum - @count</span>
+                                            <span>@item.CreatedDate</span>
+                                        </h5>
+                                        <div class="card-body">
+                                            <h4 class="card-title">@item.Name</h4>
+                                            <p class="card-text">
+                                                @item.Content
+                                            </p>
+                                            <a href="#" class="btn btn-danger">Yorumu Kaldır</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="alert alert-secondary" role="alert">
+                                Herhangi bir kayıt bulunmamaktadır.
+                            </div>
+                        }
+
+                    </div>
+                    <!-- end card-body-->
+                </div>
+                <!-- end card -->
+
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end page title -->
+
+    </div> <!-- container-fluid -->
+</div>
+

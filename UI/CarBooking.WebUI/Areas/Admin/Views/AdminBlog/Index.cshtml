@@ -1,0 +1,76 @@
+﻿@model List<ResultAllBlogsWithAuthorsDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Blog Listesi</h4>
+                        <p class="card-subtitle mb-4">
+                            Bloglar ile ilgili işlemleri yapabilirsiniz.
+                        </p>
+
+                        <div class="table-responsive">
+                            @if (Model.Count > 0)
+                            {
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Başlık</th>
+                                            <th>Yazar</th>
+                                            <th>Kategori</th>
+                                            <th>Tarih</th>
+                                            <th>Sil</th>
+                                            <th>Görüntüle</th>
+                                            <th>Yorumlar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            count++;
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <td>@item.Title</td>
+                                                <td>@item.AuthorName</td>
+                                                <td>@item.CategoryName</td>
+                                                <td>@item.CreatedDate</td>
+                                                <td><a href="/Admin/AdminBlog/RemoveBlog/@item.BlogID" class="btn btn-outline-danger">Sil</a></td>
+                                                <td><a href="/Blog/BlogDetail/@item.BlogID" class="btn btn-outline-secondary">Görüntüle</a></td>
+                                                <td><a href="/Admin/AdminComment/Index/@item.BlogID" class="btn btn-outline-dark">Yorumlar</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="alert alert-secondary" role="alert">
+                                    Herhangi bir kayıt bulunmamaktadır.
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                    <!-- end card-body-->
+                </div>
+                <!-- end card -->
+
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end page title -->
+
+    </div> <!-- container-fluid -->
+</div>
+
