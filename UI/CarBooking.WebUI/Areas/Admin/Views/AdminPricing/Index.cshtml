@@ -1,4 +1,5 @@
-﻿@model List<ResultCarWithBrandsDto>
+﻿@model List<ResultPricingDto>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -13,10 +14,11 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Araç Listesi</h4>
+                        <h4 class="card-title">Ödeme Türleri Listesi</h4>
                         <p class="card-subtitle mb-4">
-                            Araçlar ile ilgili işlemleri yapabilirsiniz.
+                            Ödeme Türleri ile ilgili işlemleri yapabilirsiniz.
                         </p>
+
                         <div class="table-responsive">
                             @if (Model.Count > 0)
                             {
@@ -24,15 +26,9 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Marka</th>
-                                            <th>Model</th>
-                                            <th>Vites</th>
-                                            <th>KM</th>
+                                            <th>Ödeme Türü</th>
                                             <th>Sil</th>
                                             <th>Güncelle</th>
-                                            <th>Detaylar</th>
-                                            <th>Sitede Gör</th>
-                                            <th>Fiyat Bilgileri</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,15 +37,9 @@
                                             count++;
                                             <tr>
                                                 <th scope="row">@count</th>
-                                                <td>@item.BrandName</td>
-                                                <td>@item.Model</td>
-                                                <td>@item.Transmission</td>
-                                                <td>@item.Mileage</td>
-                                                <td><a href="/AdminCar/RemoveCar/@item.CarID" class="btn btn-outline-danger">Sil</a></td>
-                                                <td><a href="/AdminCar/UpdateCar/@item.CarID" class="btn btn-outline-warning">Güncelle</a></td>
-                                                <td><a href="/AdminCar/DetailCar/@item.CarID" class="btn btn-outline-secondary">Detaylar</a></td>
-                                                <td><a href="/AdminCar/DetailCar/@item.CarID" class="btn btn-outline-dark">Sitede Gör</a></td>
-                                                <td><a href="/AdminCar/DetailCar/@item.CarID" class="btn btn-light">Fiyat Bilgileri</a></td>
+                                                <td>@item.Name</td>
+                                                <td><a href="/Admin/AdminPricing/RemovePricing/@item.PricingID" class="btn btn-outline-danger">Sil</a></td>
+                                                <td><a href="/Admin/AdminPricing/UpdatePricing/@item.PricingID" class="btn btn-outline-warning">Güncelle</a></td>
                                             </tr>
                                         }
                                     </tbody>
@@ -62,7 +52,7 @@
                                 </div>
                             }
 
-                            <a href="/AdminCar/CreateCar/" class="btn btn-outline-primary">Yeni Araç Ekle</a>
+                            <a href="/Admin/AdminPricing/CreatePricing/" class="btn btn-outline-primary">Yeni Ödeme Türü Ekle</a>
                         </div>
 
                     </div>
