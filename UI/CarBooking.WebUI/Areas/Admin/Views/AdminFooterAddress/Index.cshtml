@@ -1,0 +1,79 @@
+﻿@model List<ResultFooterAddressDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ana Sayfa Alt Adres Alanı</h4>
+                        <p class="card-subtitle mb-4">
+                            Ana sayfanın alt adres alanı ile ilgili işlemleri yapabilirsiniz. Tema bütünlüğünün bozulmaması için yalnızca <strong>1 adet</strong> veri bulunması gerekmektedir.
+                        </p>
+
+                        @if (Model.Count > 1)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                1'den fazla veri bulunmaktadır !!
+                            </div>
+                        }
+
+                        <div class="table-responsive">
+                            @if (Model.Count > 0)
+                            {
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Açıklama</th>
+                                            <th>Adres</th>
+                                            <th>Telefon</th>
+                                            <th>Mail</th>
+                                            <th>Sil</th>
+                                            <th>Güncelle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Description</td>
+                                                <td>@item.Address</td>
+                                                <td>@item.Phone</td>
+                                                <td>@item.Mail</td>
+                                                <td><a href="/Admin/AdminFooterAddress/RemoveFooterAddress/@item.FooterAddressID" class="btn btn-outline-danger">Sil</a></td>
+                                                <td><a href="/Admin/AdminFooterAddress/UpdateFooterAddress/@item.FooterAddressID" class="btn btn-outline-warning">Güncelle</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="alert alert-secondary" role="alert">
+                                    Herhangi bir kayıt bulunmamaktadır.
+                                </div>
+                            }
+
+                            <a href="/Admin/AdminFooterAddress/CreateFooterAddress/" class="btn btn-outline-primary">Yeni Alt Adres Ekle</a>
+                        </div>
+
+                    </div>
+                    <!-- end card-body-->
+                </div>
+                <!-- end card -->
+
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end page title -->
+
+    </div> <!-- container-fluid -->
+</div>
+
