@@ -45,7 +45,14 @@ namespace CarBooking.Persistence.Repositories.StatisticRepositories
 
         public async Task<string> GetBlogTitleByMaxBlogComment()
         {
-            return await _context.Blogs.Where(blog => blog.BlogID == _context.Comments.Max(comment => comment.BlogID)).Select(blog => blog.Title).FirstOrDefaultAsync();
+            var values = _context.Comments.GroupBy(x => x.BlogID).
+                              Select(y => new
+                              {
+                                  BlogID = y.Key,
+                                  Count = y.Count()
+                              }).OrderByDescending(z => z.Count).Take(1).FirstOrDefault();
+            string blogName = await _context.Blogs.Where(x => x.BlogID == values.BlogID).Select(y => y.Title).FirstOrDefaultAsync();
+            return blogName;
         }
 
         public async Task<int> GetBrandCount()
@@ -55,8 +62,6 @@ namespace CarBooking.Persistence.Repositories.StatisticRepositories
 
         public async Task<string> GetBrandNameByMaxCar()
         {
-            //Select Top(1) BrandId,Count(*) as 'ToplamArac' From Cars Group By Brands.Name  order By ToplamArac Desc
-
             var values = await _context.Cars.GroupBy(x => x.BrandID).
                              Select(y => new
                              {
