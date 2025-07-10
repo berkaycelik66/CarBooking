@@ -17,7 +17,7 @@ namespace CarBooking.WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> IndexAsync(int LocationID, string PickUpDate, string PickUpTime, string DropOffDate, string DropOffTime)
+        public async Task<IActionResult> Index(int LocationID, string PickUpDate, string PickUpTime, string DropOffDate, string DropOffTime)
         {
             ViewBag.v1 = "Araçlar";
             ViewBag.v2 = "Uygun Araçlar";

@@ -10,6 +10,7 @@ namespace CarBooking.Application.Interfaces.CarInterfaces
     public interface ICarRepository
     {
         Task<List<Car>> GetCarListWithBrands();
+        Task<Car> GetCarByIdWithBrand(int id);
         Task<List<Car>> GetLast5CarsWithBrands();
     }
 }

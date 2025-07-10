@@ -1,0 +1,78 @@
+﻿@model CreateReservationDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center align-items-start">
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow rounded overflow-hidden">
+                <img src="@ViewBag.CarImage" class="card-img-top img-fluid" style="height: 300px; object-fit: cover;" alt="Araç Görseli">
+                <div class="card-body text-center">
+                    <h3 class="fw-bold display-6" style="color:#01d28e">
+                        Kiralanacak Araç
+                    </h3>
+                    <h5 class="card-title fw-semibold">@ViewBag.CarName</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <form method="post" class="bg-light p-4 rounded shadow">
+                <input type="hidden" class="form-control" id="CarID" asp-for="CarID" value="@ViewBag.v3" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="Name" asp-for="Name" placeholder="İsim">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="Surname" asp-for="Surname" placeholder="Soyisim">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input type="email" class="form-control" id="Email" asp-for="Email" placeholder="Mail Adresi">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="Phone" asp-for="Phone" placeholder="Telefon Numarası">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <select class="form-control" asp-items="@ViewBag.LocationValues" asp-for="PickUpLocationID">
+                            <option selected disabled>--Alış Lokasyonu--</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control" asp-items="@ViewBag.LocationValues" asp-for="DropOffLocationID">
+                            <option selected disabled>--Teslim Lokasyonu--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input type="number" class="form-control" id="Age" asp-for="Age" placeholder="Yaş">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="number" class="form-control" id="DriverLicenseYear" asp-for="DriverLicenseYear" placeholder="Ehliyet Alış Yılı">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <textarea id="Description" rows="4" class="form-control" asp-for="Description" placeholder="Eklemek İstedikleriniz"></textarea>
+                </div>
+
+                <div class="text-end">
+                    <input type="submit" value="Rezervasyonu Tamamla" class="btn btn-primary px-4 py-2">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

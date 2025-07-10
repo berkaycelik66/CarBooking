@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBooking.Dto.CarPricingDtos
+namespace CarBooking.Application.Features.CQRS.Results.CarResults
 {
-    public class ResultCarPricingWithCarDto
+    public class GetCarByIdWithBrandQueryResult
     {
-        public int CarPricingID { get; set; }
         public int CarID { get; set; }
-        public string? Brand { get; set; }
+        public int BrandID { get; set; }
+        public string? BrandName { get; set; }
         public string? Model { get; set; }
-        public decimal Amount { get; set; }
         public string? CoverImageUrl { get; set; }
     }
 }
