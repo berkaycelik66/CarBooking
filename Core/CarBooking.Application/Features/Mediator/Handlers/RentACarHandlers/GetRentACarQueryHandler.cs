@@ -25,6 +25,10 @@ namespace CarBooking.Application.Features.Mediator.Handlers.RentACarHandlers
             return values.Select(x => new GetRentACarQueryResult
             {
                 CarID = x.CarID,
+                Brand = x.Car!.Brand!.Name,
+                Model = x.Car.Model,
+                Amount = x.Car.CarPricings.Where(cp => cp.CarID == x.CarID).Select(cp => cp.Price).FirstOrDefault(),
+                CoverImageUrl = x.Car.CoverImageUrl,
             }).ToList();
         }
     }
