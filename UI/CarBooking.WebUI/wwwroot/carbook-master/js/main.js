@@ -315,10 +315,10 @@
 
 
 	$('#book_pick_date,#book_off_date').datepicker({
-	  'format': 'm/d/yyyy',
+	  'format': 'd/m/yyyy',
 	  'autoclose': true
 	});
-	$('#time_pick').timepicker();
+	$('#pick_up_time_pick, #drop_off_time_pick').timepicker();
 
 
 
