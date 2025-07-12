@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBooking.Dto.CommentDtos
+namespace CarBooking.Application.Features.Mediator.Results.CommentResults
 {
-    public class ResultCommentByBlogIdDto
+    public class GetCommentQueryResult
     {
         public int CommentID { get; set; }
         public string? Name { get; set; }

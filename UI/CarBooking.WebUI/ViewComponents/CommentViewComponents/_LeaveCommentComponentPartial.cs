@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarBooking.Dto.CommentDtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarBooking.WebUI.ViewComponents.CommentViewComponents
 {
     public class _LeaveCommentComponentPartial : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int id)
         {
-            return View();
+            var model = new CreateCommentDto
+            {
+                BlogID = id
+            };
+
+            return View(model);
         }
     }
 }

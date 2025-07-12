@@ -10,6 +10,7 @@ namespace CarBooking.Domain.Entities
     {
         public int CommentID { get; set; }
         public string? Name { get; set; }
+        public string? Mail { get; set; }
         public string? Content { get; set; }
         public DateTime CreatedDate { get; set; }
         public int BlogID { get; set; }

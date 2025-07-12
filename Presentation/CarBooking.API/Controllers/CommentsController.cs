@@ -1,7 +1,12 @@
-﻿using CarBooking.Application.Features.RepositoryPattern;
+﻿using CarBooking.Application.Features.Mediator.Commands.CommentCommands;
+using CarBooking.Application.Features.Mediator.Queries.CommentQueries;
+using CarBooking.Application.Features.RepositoryPattern;
+using CarBooking.Application.Interfaces.CommentInterfaces;
 using CarBooking.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CarBooking.API.Controllers
 {
@@ -9,62 +14,52 @@ namespace CarBooking.API.Controllers
     [ApiController]
     public class CommentsController : ControllerBase
     {
-        private readonly IGenericRepository<Comment> _commentRepository;
+        private readonly IMediator _mediator;
 
-        public CommentsController(IGenericRepository<Comment> commentRepository)
+        public CommentsController(IMediator mediator)
         {
-            _commentRepository = commentRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult CommentList()
+        public async Task<IActionResult> CommentList()
         {
-            var values = _commentRepository.GetAll();
+            var values = await _mediator.Send(new GetCommentQuery());
             return Ok(values);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetComment(int id)
+        public async Task<IActionResult> GetComment(int id)
         {
-            var value = _commentRepository.GetById(id);
+            var value = await _mediator.Send(new GetCommentByIdQuery(id));
             return Ok(value);
         }
 
         [HttpGet("GetCommentListByBlogId/{id}")]
-        public IActionResult GetCommentListByBlogId(int id)
+        public async Task<IActionResult> GetCommentListByBlogId(int id)
         {
-            var value = _commentRepository.GetCommentsByBlogId(id);
+            var value = await _mediator.Send(new GetCommentByBlogIdQuery(id));
             return Ok(value);
         }
 
         [HttpPost]
-        public IActionResult CreateComment(Comment comment)
+        public async Task<IActionResult> CreateComment(CreateCommentCommand command)
         {
-            if (comment == null)
-            {
-                return BadRequest();
-            }
-
-            _commentRepository.Create(comment);
+            await _mediator.Send(command);
             return Ok("Yorum Eklendi");
         }
 
         [HttpDelete("{id}")]
-        public IActionResult RemoveComment(int id)
+        public async Task<IActionResult> RemoveComment(int id)
         {
-            _commentRepository.Remove(id);
+            await _mediator.Send(new RemoveCommentCommand(id));
             return Ok("Yorum Silindi");
         }
 
         [HttpPut]
-        public IActionResult UpdateComment(Comment comment)
+        public async Task<IActionResult> UpdateComment(UpdateCommentCommand command)
         {
-            if (comment == null)
-            {
-                return BadRequest();
-            }
-
-            _commentRepository.Update(comment);
+            await _mediator.Send(command);
             return Ok("Yorum Güncellendi");
         }
 

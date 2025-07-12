@@ -9,6 +9,7 @@ using CarBooking.Application.Interfaces;
 using CarBooking.Application.Interfaces.BlogInterfaces;
 using CarBooking.Application.Interfaces.CarInterfaces;
 using CarBooking.Application.Interfaces.CarPricingInterfaces;
+using CarBooking.Application.Interfaces.CommentInterfaces;
 using CarBooking.Application.Interfaces.RentACarInterfaces;
 using CarBooking.Application.Interfaces.StatisticInterfaces;
 using CarBooking.Application.Interfaces.TagCloudInterfaces;
@@ -33,9 +34,9 @@ builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<ICarPricingRepository, CarPricingRepository>();
 builder.Services.AddScoped<ITagCloudRepository, TagCloudRepository>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(CommentRepository<>));
 builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
 builder.Services.AddScoped<IRentACarRepository, RentACarRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();

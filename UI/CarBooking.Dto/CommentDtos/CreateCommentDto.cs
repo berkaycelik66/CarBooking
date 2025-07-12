@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarBooking.Dto.CommentDtos
 {
-    public class ResultCommentByBlogIdDto
+    public class CreateCommentDto
     {
-        public int CommentID { get; set; }
         public string? Name { get; set; }
         public string? Mail { get; set; }
         public string? Content { get; set; }

@@ -1,6 +1,10 @@
 ﻿using CarBooking.Dto.BlogDtos;
+using CarBooking.Dto.CommentDtos;
+using CarBooking.Dto.ContactDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CarBooking.WebUI.Controllers
 {
@@ -34,6 +38,21 @@ namespace CarBooking.WebUI.Controllers
             ViewBag.v1 = "Bloglar";
             ViewBag.v2 = "Blog Detayı";
             ViewBag.blogid = id;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LeaveComment(CreateCommentDto createCommentDto)
+        {
+            createCommentDto.CreatedDate = DateTime.Now;
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(createCommentDto);
+            StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7164/api/Comments", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("BlogDetail", "Blog", new { id = createCommentDto.BlogID });
+            }
             return View();
         }
     }
