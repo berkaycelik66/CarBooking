@@ -10,10 +10,9 @@
     @await Component.InvokeAsync("_BlogDetailAboutAuthorComponentPartial", new {id = Model.AuthorID})
 
     <div class="pt-5 mt-5">
-        <h3 class="mb-5">Yorumlar</h3>
-        @await Component.InvokeAsync("_CommentListByBlogComponentPartial")
+        @await Component.InvokeAsync("_CommentListByBlogComponentPartial", new { id = ViewBag.blogid })
 
-        @await Component.InvokeAsync("_LeaveCommentComponentPartial")      
+        @await Component.InvokeAsync("_LeaveCommentComponentPartial")
     </div>
 
 </div>
