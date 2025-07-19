@@ -12,5 +12,6 @@ namespace CarBooking.Application.Interfaces.CarInterfaces
         Task<List<Car>> GetCarListWithBrands();
         Task<Car> GetCarByIdWithBrand(int id);
         Task<List<Car>> GetLast5CarsWithBrands();
+        Task<List<Car>> GetCarCountByBrand();
     }
 }

@@ -28,5 +28,12 @@ namespace CarBooking.API.Controllers
             var values = await _mediator.Send(getRentACarQuery);
             return Ok(values);
         }
+
+        [HttpGet("GetPresentCarCountByLocation")]
+        public async Task<IActionResult> GetPresentCarCountByLocation()
+        {
+            var values = await _mediator.Send(new GetPresentCarCountByLocationQuery());
+            return Ok(values);
+        }
     }
 }

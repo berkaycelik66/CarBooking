@@ -24,5 +24,10 @@ namespace CarBooking.Persistence.Repositories.RentACarRepositories
         {
             return await _context.RentACars.Where(filter).Include(r => r.Car).ThenInclude(c => c.Brand).Include(r => r.Car).ThenInclude(c => c.CarPricings).ToListAsync();
         }
+
+        public async Task<List<RentACar>> GetPresentCarCountByLocation()
+        {
+            return await _context.RentACars.Include(l => l.Location).ToListAsync();
+        }
     }
 }
