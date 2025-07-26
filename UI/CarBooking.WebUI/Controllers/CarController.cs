@@ -30,5 +30,13 @@ namespace CarBooking.WebUI.Controllers
 
             return View();
         }
+
+        public IActionResult CarDetail(int id)
+        {
+            ViewBag.v1 = "Araçlar";
+            ViewBag.v2 = "Araç Detayları";
+            ViewBag.carid = id;
+            return View();
+        }
     }
 }

@@ -21,9 +21,10 @@ namespace CarBooking.API.Controllers
         private readonly GetLast5CarsWithBrandsQueryHandler _getLast5CarsWithBrandsQueryHandler;
         private readonly GetCarByIdWithBrandQueryHandler _getCarByIdWithBrandQueryHandler;
         private readonly GetCarCountByBrandQueryHandler _getCarCountByBrandQueryHandler;
+        private readonly GetCarDetailByIdWithBrandQueryHandler _getCarDetailByIdWithBrandQueryHandler;
         private readonly IMediator _mediator;
 
-        public CarsController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, RemoveCarCommandHandler removeCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWithBrandsQueryHandler getLast5CarsWithBrandsQueryHandler, IMediator mediator, GetCarByIdWithBrandQueryHandler getCarByIdWithBrandQueryHandler, GetCarCountByBrandQueryHandler getCarCountByBrandQueryHandler)
+        public CarsController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, RemoveCarCommandHandler removeCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWithBrandsQueryHandler getLast5CarsWithBrandsQueryHandler, IMediator mediator, GetCarByIdWithBrandQueryHandler getCarByIdWithBrandQueryHandler, GetCarCountByBrandQueryHandler getCarCountByBrandQueryHandler, GetCarDetailByIdWithBrandQueryHandler getCarDetailByIdWithBrandQueryHandler)
         {
             _createCarCommandHandler = createCarCommandHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -35,6 +36,7 @@ namespace CarBooking.API.Controllers
             _mediator = mediator;
             _getCarByIdWithBrandQueryHandler = getCarByIdWithBrandQueryHandler;
             _getCarCountByBrandQueryHandler = getCarCountByBrandQueryHandler;
+            _getCarDetailByIdWithBrandQueryHandler = getCarDetailByIdWithBrandQueryHandler;
         }
 
         [HttpGet]
@@ -97,6 +99,13 @@ namespace CarBooking.API.Controllers
         public async Task<IActionResult> GetCarCountByBrand()
         {
             var values = await _getCarCountByBrandQueryHandler.Handle();
+            return Ok(values);
+        }
+
+        [HttpGet("GetCarDetailByIdWithBrand/{id}")]
+        public async Task<IActionResult> GetCarDetailByIdWithBrand(int id)
+        {
+            var values = await _getCarDetailByIdWithBrandQueryHandler.Handle(new GetCarDetailByIdWithBrandQuery(id));
             return Ok(values);
         }
     }

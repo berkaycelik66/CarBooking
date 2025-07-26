@@ -38,5 +38,9 @@ namespace CarBooking.Persistence.Repositories.CarRepositories
         {
             return await _context.Cars.Include(x => x.Brand).ToListAsync();
         }
+        public async Task<Car> GetCarDetailByIdWithBrand(int id)
+        {
+            return await _context.Cars.Include(x => x.Brand).Where(x => x.CarID == id).FirstOrDefaultAsync();
+        }
     }
 }
