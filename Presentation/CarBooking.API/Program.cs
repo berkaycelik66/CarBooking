@@ -13,6 +13,7 @@ using CarBooking.Application.Interfaces.CarInterfaces;
 using CarBooking.Application.Interfaces.CarPricingInterfaces;
 using CarBooking.Application.Interfaces.CommentInterfaces;
 using CarBooking.Application.Interfaces.RentACarInterfaces;
+using CarBooking.Application.Interfaces.ReviewInterfaces;
 using CarBooking.Application.Interfaces.StatisticInterfaces;
 using CarBooking.Application.Interfaces.TagCloudInterfaces;
 using CarBooking.Application.Services;
@@ -25,6 +26,7 @@ using CarBooking.Persistence.Repositories.CarPricingRepositories;
 using CarBooking.Persistence.Repositories.CarRepositories;
 using CarBooking.Persistence.Repositories.CommentRepositories;
 using CarBooking.Persistence.Repositories.RentACarRepositories;
+using CarBooking.Persistence.Repositories.ReviewRepositories;
 using CarBooking.Persistence.Repositories.StatisticRepositories;
 using CarBooking.Persistence.Repositories.TagCloudRepositories;
 
@@ -43,6 +45,7 @@ builder.Services.AddScoped<IRentACarRepository, RentACarRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
 builder.Services.AddScoped<ICarDescriptionRepository, CarDescriptionRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
