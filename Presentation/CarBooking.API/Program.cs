@@ -17,6 +17,7 @@ using CarBooking.Application.Interfaces.ReviewInterfaces;
 using CarBooking.Application.Interfaces.StatisticInterfaces;
 using CarBooking.Application.Interfaces.TagCloudInterfaces;
 using CarBooking.Application.Services;
+using CarBooking.Application.Validators.ReviewValidators;
 using CarBooking.Persistence.Context;
 using CarBooking.Persistence.Repositories;
 using CarBooking.Persistence.Repositories.BlogRepositories;
@@ -29,6 +30,9 @@ using CarBooking.Persistence.Repositories.RentACarRepositories;
 using CarBooking.Persistence.Repositories.ReviewRepositories;
 using CarBooking.Persistence.Repositories.StatisticRepositories;
 using CarBooking.Persistence.Repositories.TagCloudRepositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,6 +93,11 @@ builder.Services.AddScoped<RemoveContactCommandHandler>();
 builder.Services.AddScoped<UpdateContactCommandHandler>();
 
 builder.Services.AddApplicationServices(builder.Configuration);
+
+builder.Services.AddFluentValidationAutoValidation()
+    .AddFluentValidationClientsideAdapters()
+    .AddValidatorsFromAssemblyContaining<CreateReviewValidator>()
+    .AddValidatorsFromAssemblyContaining<UpdateReviewValidator>(); 
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
