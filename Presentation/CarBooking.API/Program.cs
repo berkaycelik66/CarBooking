@@ -6,6 +6,8 @@ using CarBooking.Application.Features.CQRS.Handlers.CategoryHandlers;
 using CarBooking.Application.Features.CQRS.Handlers.ContactHandlers;
 using CarBooking.Application.Features.RepositoryPattern;
 using CarBooking.Application.Interfaces;
+using CarBooking.Application.Interfaces.AppRoleInterfaces;
+using CarBooking.Application.Interfaces.AppUserInterfaces;
 using CarBooking.Application.Interfaces.BlogInterfaces;
 using CarBooking.Application.Interfaces.CarDescriptionInterfaces;
 using CarBooking.Application.Interfaces.CarFeatureInterfaces;
@@ -17,9 +19,12 @@ using CarBooking.Application.Interfaces.ReviewInterfaces;
 using CarBooking.Application.Interfaces.StatisticInterfaces;
 using CarBooking.Application.Interfaces.TagCloudInterfaces;
 using CarBooking.Application.Services;
+using CarBooking.Application.Tools;
 using CarBooking.Application.Validators.ReviewValidators;
 using CarBooking.Persistence.Context;
 using CarBooking.Persistence.Repositories;
+using CarBooking.Persistence.Repositories.AppRoleRepositories;
+using CarBooking.Persistence.Repositories.AppUserRepositories;
 using CarBooking.Persistence.Repositories.BlogRepositories;
 using CarBooking.Persistence.Repositories.CarDescriptionRepositories;
 using CarBooking.Persistence.Repositories.CarFeatureRepositories;
@@ -32,11 +37,28 @@ using CarBooking.Persistence.Repositories.StatisticRepositories;
 using CarBooking.Persistence.Repositories.TagCloudRepositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.RequireHttpsMetadata = false;
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidAudience = JwtTokenDefaults.ValidAudience,
+        ValidIssuer = JwtTokenDefaults.ValidIssuer,
+        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+});
 
 builder.Services.AddScoped<CarBookingContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -50,6 +72,8 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
 builder.Services.AddScoped<ICarDescriptionRepository, CarDescriptionRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
+builder.Services.AddScoped<IAppRoleRepository, AppRoleRepository>();
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
@@ -114,7 +138,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
