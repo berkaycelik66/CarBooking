@@ -24,6 +24,9 @@ namespace CarBooking.Application.Features.Mediator.Handlers.AppUserHandlers
         {
             await _repository.CreateAsync(new AppUser
             {
+                Name = request.Name,
+                Surname = request.Surname,
+                Mail = request.Mail,
                 Username = request.Username,
                 Password = request.Password,
                 AppRoleID = (int) RoleType.Member
